@@ -26,10 +26,10 @@
 #ifndef EXPRESSIONS_COMMON_H
 #define EXPRESSIONS_COMMON_H
 
-#ifndef NDEBUG
-#define ON_DEBUG(A) (A)
+#if defined(TRACE_LOGGING)
+#define LOG_TRACE(A) (A)
 #else
-#define ON_DEBUG(A)
+#define LOG_TRACE(A)
 #endif
 
 #endif

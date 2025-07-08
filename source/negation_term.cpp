@@ -31,18 +31,18 @@
 Expressions::NegationTerm::NegationTerm(std::unique_ptr< Expressions::Term > && One) :
 	_One(std::move(One))
 {
-	ON_DEBUG(std::cout << "Expressions::NegationTerm::NegationTerm(std::unique_ptr< Expressions::Term > &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::NegationTerm::NegationTerm(std::unique_ptr< Expressions::Term > &&)" << std::endl);
 	_One->SetParent(this);
 }
 
 Expressions::NegationTerm::~NegationTerm(void)
 {
-	ON_DEBUG(std::cout << "Expressions::NegationTerm::~NegationTerm()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::NegationTerm::~NegationTerm()" << std::endl);
 }
 
 float Expressions::NegationTerm::Calculate(void)
 {
-	ON_DEBUG(std::cout << "Expressions::NegationTerm::Calculate()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::NegationTerm::Calculate()" << std::endl);
 	
 	return -_One->GetValue();
 }

@@ -32,19 +32,19 @@ Expressions::DivisionTerm::DivisionTerm(std::unique_ptr< Expressions::Term > && 
 	_One(std::move(One)),
 	_Two(std::move(Two))
 {
-	ON_DEBUG(std::cout << "Expressions::DivisionTerm::DivisionTerm(std::unique_ptr< Expressions::Term > &&, std::unique_ptr< Expressions::Term > &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::DivisionTerm::DivisionTerm(std::unique_ptr< Expressions::Term > &&, std::unique_ptr< Expressions::Term > &&)" << std::endl);
 	_One->SetParent(this);
 	_Two->SetParent(this);
 }
 
 Expressions::DivisionTerm::~DivisionTerm(void)
 {
-	ON_DEBUG(std::cout << "Expressions::DivisionTerm::~DivisionTerm()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::DivisionTerm::~DivisionTerm()" << std::endl);
 }
 
 float Expressions::DivisionTerm::Calculate(void)
 {
-	ON_DEBUG(std::cout << "Expressions::DivisionTerm::Calculate()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::DivisionTerm::Calculate()" << std::endl);
 	
 	return _One->GetValue() / _Two->GetValue();
 }

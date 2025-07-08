@@ -10,6 +10,13 @@ project(
   ]
 )
 
+if get_option('trace_logging') == 'yes' or (get_option('trace_logging') == 'if_main_project' and meson.is_subproject() == false)
+  add_project_arguments('-DTRACE_LOGGING', language: ['cpp'])
+  message('Trace logging activated!')
+else
+  message('Trace logging deactivated!')
+endif
+
 expressions_library_sources = files(
   'source/addition_term.cpp',
   'source/constant_term.cpp',

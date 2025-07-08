@@ -32,19 +32,19 @@ Expressions::MultiplicationTerm::MultiplicationTerm(std::unique_ptr< Expressions
 	_One(std::move(One)),
 	_Two(std::move(Two))
 {
-	ON_DEBUG(std::cout << "Expressions::MultiplicationTerm::MultiplicationTerm(std::unique_ptr< Expressions::Term > &&, std::unique_ptr< Expressions::Term > &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::MultiplicationTerm::MultiplicationTerm(std::unique_ptr< Expressions::Term > &&, std::unique_ptr< Expressions::Term > &&)" << std::endl);
 	_One->SetParent(this);
 	_Two->SetParent(this);
 }
 
 Expressions::MultiplicationTerm::~MultiplicationTerm(void)
 {
-	ON_DEBUG(std::cout << "Expressions::MultiplicationTerm::~MultiplicationTerm()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::MultiplicationTerm::~MultiplicationTerm()" << std::endl);
 }
 
 float Expressions::MultiplicationTerm::Calculate(void)
 {
-	ON_DEBUG(std::cout << "Expressions::MultiplicationTerm::Calculate()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::MultiplicationTerm::Calculate()" << std::endl);
 	
 	return _One->GetValue() * _Two->GetValue();
 }

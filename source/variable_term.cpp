@@ -36,13 +36,13 @@ Expressions::VariableTerm::VariableTerm(Expressions::Variable * Variable) :
 	_Variable(Variable)
 {
 	assert(Variable != nullptr);
-	ON_DEBUG(std::cout << "Expressions::VariableTerm::VariableTerm(Expressions::Variable *)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::VariableTerm::VariableTerm(Expressions::Variable *)" << std::endl);
 	_Variable->_AddDependentTerm(this);
 }
 
 Expressions::VariableTerm::~VariableTerm(void)
 {
-	ON_DEBUG(std::cout << "Expressions::VariableTerm::~VariableTerm()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::VariableTerm::~VariableTerm()" << std::endl);
 	if(_Variable != nullptr)
 	{
 		_Variable->_RemoveDependentTerm(this);
@@ -51,7 +51,7 @@ Expressions::VariableTerm::~VariableTerm(void)
 
 float Expressions::VariableTerm::Calculate(void)
 {
-	ON_DEBUG(std::cout << "Expressions::VariableTerm::Calculate()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::VariableTerm::Calculate()" << std::endl);
 	if(_Variable != nullptr)
 	{
 		return _Variable->GetValue();
@@ -64,7 +64,7 @@ float Expressions::VariableTerm::Calculate(void)
 
 void Expressions::VariableTerm::InvalidateReference(void)
 {
-	ON_DEBUG(std::cout << "Expressions::VariableTerm::InvalidateReference()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::VariableTerm::InvalidateReference()" << std::endl);
 	assert(_Variable != nullptr);
 	_Variable = nullptr;
 	InvalidateValue();

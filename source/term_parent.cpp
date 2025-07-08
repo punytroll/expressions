@@ -31,10 +31,10 @@
 
 Expressions::TermParent::TermParent(void)
 {
-	ON_DEBUG(std::cout << "Expressions::TermParent::TermParent()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::TermParent::TermParent()" << std::endl);
 }
 
 Expressions::TermParent::~TermParent(void)
 {
-	ON_DEBUG(std::cout << "Expressions::TermParent::~TermParent()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::TermParent::~TermParent()" << std::endl);
 }

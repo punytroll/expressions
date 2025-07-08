@@ -32,17 +32,17 @@
 Expressions::ConstantTerm::ConstantTerm(float Value) :
 	_Value(Value)
 {
-	ON_DEBUG(std::cout << "Expressions::ConstantTerm::ConstantTerm(float)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::ConstantTerm::ConstantTerm(float)" << std::endl);
 }
 
 Expressions::ConstantTerm::~ConstantTerm(void)
 {
-	ON_DEBUG(std::cout << "Expressions::ConstantTerm::~ConstantTerm()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::ConstantTerm::~ConstantTerm()" << std::endl);
 }
 
 float Expressions::ConstantTerm::Calculate(void)
 {
-	ON_DEBUG(std::cout << "Expressions::ConstantTerm::Calculate()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::ConstantTerm::Calculate()" << std::endl);
 	
 	return _Value;
 }

@@ -36,12 +36,12 @@
 
 Expressions::Expression::Expression(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Expression::Expression()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Expression::Expression()" << std::endl);
 }
 
 Expressions::Expression::Expression(Expression && Expression)
 {
-	ON_DEBUG(std::cout << "Expressions::Expression::Expression(Expressions::Expression &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Expression::Expression(Expressions::Expression &&)" << std::endl);
 	if(_Term != nullptr)
 	{
 		assert(_Term->_Parent == this);
@@ -57,26 +57,26 @@ Expressions::Expression::Expression(Expression && Expression)
 Expressions::Expression::Expression(Expressions::Variable & Variable) :
 	_Term(std::make_unique< Expressions::VariableTerm >(&Variable))
 {
-	ON_DEBUG(std::cout << "Expressions::Expression::Expression(Expressions::Variable &)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Expression::Expression(Expressions::Variable &)" << std::endl);
 	_Term->SetParent(this);
 }
 
 Expressions::Expression::Expression(std::unique_ptr< Expressions::Term > && Term) :
 	_Term(std::move(Term))
 {
-	ON_DEBUG(std::cout << "Expressions::Expression::Expression(std::unique_ptr< Expressions::Term > &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Expression::Expression(std::unique_ptr< Expressions::Term > &&)" << std::endl);
 	_Term->SetParent(this);
 }
 
 Expressions::Expression::~Expression(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Expression::~Expression()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Expression::~Expression()" << std::endl);
 	assert(_Term == nullptr || _Term->_Parent == this);
 }
 
 std::unique_ptr< Expressions::Term > Expressions::Expression::ExtractTerm(void)
 {
-	ON_DEBUG(std::cout << "std::unique_ptr< Expressions::Term > Expressions::Expression::ExtractTerm()" << std::endl);
+	LOG_TRACE(std::cout << "std::unique_ptr< Expressions::Term > Expressions::Expression::ExtractTerm()" << std::endl);
 	if(_Term != nullptr)
 	{
 		_Term->SetParent(nullptr);
@@ -87,7 +87,7 @@ std::unique_ptr< Expressions::Term > Expressions::Expression::ExtractTerm(void)
 
 float Expressions::Expression::GetValue(void)
 {
-	ON_DEBUG(std::cout << "float Expressions::Expression::GetValue()" << std::endl);
+	LOG_TRACE(std::cout << "float Expressions::Expression::GetValue()" << std::endl);
 	if(_Term)
 	{
 		return _Term->GetValue();
@@ -100,12 +100,12 @@ float Expressions::Expression::GetValue(void)
 
 void Expressions::Expression::InvalidateValue(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Expression::InvalidateValue()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Expression::InvalidateValue()" << std::endl);
 }
 
 Expressions::Expression & Expressions::Expression::operator=(Expressions::Expression && Expression)
 {
-	ON_DEBUG(std::cout << "Expressions::Expression::operator=(Expressions::Expression &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Expression::operator=(Expressions::Expression &&)" << std::endl);
 	if(_Term != nullptr)
 	{
 		assert(_Term->_Parent == this);

@@ -34,19 +34,19 @@ Expressions::Term::Term(void) :
 	_Parent(nullptr),
 	_Value(nullptr)
 {
-	ON_DEBUG(std::cout << "Expressions::Term::Term()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Term::Term()" << std::endl);
 }
 
 Expressions::Term::~Term(void)
 {
 	delete _Value;
 	_Value = nullptr;
-	ON_DEBUG(std::cout << "Expressions::Term::~Term()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Term::~Term()" << std::endl);
 }
 
 float Expressions::Term::GetValue(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Term::GetValue()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Term::GetValue()" << std::endl);
 	if(_Value == nullptr)
 	{
 		_Value = new float(Calculate());
@@ -58,7 +58,7 @@ float Expressions::Term::GetValue(void)
 
 void Expressions::Term::InvalidateValue(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Term::InvalidateValue()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Term::InvalidateValue()" << std::endl);
 	delete _Value;
 	_Value = nullptr;
 	if(_Parent != nullptr)
@@ -69,7 +69,7 @@ void Expressions::Term::InvalidateValue(void)
 
 void Expressions::Term::SetParent(Expressions::TermParent * Parent)
 {
-	ON_DEBUG(std::cout << "Expressions::Term::SetParent(Expressions::TermParent *)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Term::SetParent(Expressions::TermParent *)" << std::endl);
 	assert(_Parent == nullptr || Parent == nullptr);
 	_Parent = Parent;
 }

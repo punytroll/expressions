@@ -37,20 +37,20 @@ using namespace Expressions::Operators;
 
 Expressions::Variable::Variable(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Variable::Variable()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable::Variable()" << std::endl);
 }
 
 Expressions::Variable::Variable(Expressions::Expression && Expression) :
 	_Term(std::move(Expression.ExtractTerm()))
 {
-	ON_DEBUG(std::cout << "Expressions::Variable::Variable(Expressions::Expression &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable::Variable(Expressions::Expression &&)" << std::endl);
 	_Term->SetParent(this);
 	InvalidateValue();
 }
 
 Expressions::Variable::~Variable(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Variable::~Variable()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable::~Variable()" << std::endl);
 	assert(_Term == nullptr || _Term->_Parent == this);
 	while(_DependentVariableTerms.empty() == false)
 	{
@@ -63,7 +63,7 @@ Expressions::Variable::~Variable(void)
 
 float Expressions::Variable::GetValue(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Variable::GetValue()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable::GetValue()" << std::endl);
 	if(_Term != nullptr)
 	{
 		return _Term->GetValue();
@@ -76,17 +76,17 @@ float Expressions::Variable::GetValue(void)
 
 void Expressions::Variable::InvalidateValue(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Variable::InvalidateValue()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable::InvalidateValue()" << std::endl);
 	for(auto & DependentVariableTerm : _DependentVariableTerms)
 	{
-		ON_DEBUG(std::cout << "    Notifying one dependent variable term that we changed." << std::endl);
+		LOG_TRACE(std::cout << "    Notifying one dependent variable term that we changed." << std::endl);
 		DependentVariableTerm->InvalidateValue();
 	}
 }
 
 void Expressions::Variable::Reset(void)
 {
-	ON_DEBUG(std::cout << "Expressions::Variable::Reset()" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable::Reset()" << std::endl);
 	float OldValue{std::nanf("")};
 	
 	if(_Term != nullptr)
@@ -104,7 +104,7 @@ void Expressions::Variable::Reset(void)
 
 void Expressions::Variable::SetExpression(Expressions::Expression && Expression)
 {
-	ON_DEBUG(std::cout << "Expressions::Variable::SetExpression(Expressions::Expression &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable::SetExpression(Expressions::Expression &&)" << std::endl);
 	
 	float OldValue{std::nanf("")};
 	float NewValue{std::nanf("")};
@@ -139,7 +139,7 @@ void Expressions::Variable::_RemoveDependentTerm(Expressions::VariableTerm * Dep
 
 Expressions::Variable & Expressions::Variable::operator=(Expressions::Variable & Variable)
 {
-	ON_DEBUG(std::cout << "Expressions::Variable & Expressions::Variable::operator=(Expressions::Variable &)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable & Expressions::Variable::operator=(Expressions::Variable &)" << std::endl);
 	SetExpression(Expressions::Expression(Variable));
 	
 	return *this;
@@ -147,7 +147,7 @@ Expressions::Variable & Expressions::Variable::operator=(Expressions::Variable &
 
 Expressions::Variable & Expressions::Variable::operator=(Expressions::Expression && Expression)
 {
-	ON_DEBUG(std::cout << "Expressions::Variable & Expressions::Variable::operator=(Expressions::Expression &&)" << std::endl);
+	LOG_TRACE(std::cout << "Expressions::Variable & Expressions::Variable::operator=(Expressions::Expression &&)" << std::endl);
 	SetExpression(std::move(Expression));
 	
 	return *this;
