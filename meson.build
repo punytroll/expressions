@@ -1,10 +1,10 @@
 project(
   'expressions',
   'cpp',
-  version: '0.7.1',
+  version: '0.8.0',
   meson_version: '>=1.4.0',
   default_options: [
-    'cpp_std=c++20',
+    'cpp_std=c++23',
     'warning_level=3',
     'werror=true'
   ]

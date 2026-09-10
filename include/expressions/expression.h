@@ -44,7 +44,7 @@ namespace Expressions
 	{
 	public:
 		friend class Expressions::Variable;
-		friend Expressions::Expression Expressions::Operators::operator"" _c(long double Value);
+		friend Expressions::Expression Expressions::Operators::operator""_c(long double Value);
 		friend Expressions::Expression Expressions::Operators::constant(double Value);
 		friend Expressions::Expression Expressions::Operators::operator-(Expressions::Expression && One);
 		friend Expressions::Expression Expressions::Operators::operator-(Expressions::Variable & Variable);

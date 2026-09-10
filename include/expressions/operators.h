@@ -33,7 +33,7 @@ namespace Expressions
 	
 	namespace Operators
 	{
-		Expressions::Expression operator"" _c(long double Value);
+		Expressions::Expression operator""_c(long double Value);
 		Expressions::Expression constant(double Value);
 		Expressions::Expression operator-(Expressions::Expression && One);
 		Expressions::Expression operator-(Expressions::Variable & Variable);

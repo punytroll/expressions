@@ -37,7 +37,7 @@
 #include "subtraction_term.h"
 #include "variable_term.h"
 
-Expressions::Expression Expressions::Operators::operator"" _c(long double Value)
+Expressions::Expression Expressions::Operators::operator""_c(long double Value)
 {
 	LOG_TRACE(std::cout << "Expressions::Operators::operator\"\" _c(long double)" << std::endl);
 	
