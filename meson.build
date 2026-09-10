@@ -1,7 +1,7 @@
 project(
   'expressions',
   'cpp',
-  version: '0.8.0',
+  version: '0.8.1',
   meson_version: '>=1.4.0',
   default_options: [
     'cpp_std=c++23',
@@ -45,3 +45,5 @@ expressions_library_dependency = declare_dependency(
     expressions_library
   ]
 )
+
+meson.override_dependency('expressions', expressions_library_dependency)
