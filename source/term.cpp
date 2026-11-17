@@ -1,26 +1,7 @@
 /**
- * MIT License
- * 
  * expressions
- * Copyright (c) 2017-2024 Hagen Möbius
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * Copyright (c) 2017-2026 Hagen MÃ¶bius
+ * SPDX-License-Identifier: MIT
  **/
 
 #include <cassert>
@@ -31,45 +12,45 @@
 #include "common.h"
 
 Expressions::Term::Term(void) :
-	_Parent(nullptr),
-	_Value(nullptr)
+    _Parent(nullptr),
+    _Value(nullptr)
 {
-	LOG_TRACE(std::cout << "Expressions::Term::Term()" << std::endl);
+    LOG_TRACE(std::cout << "Expressions::Term::Term()" << std::endl);
 }
 
 Expressions::Term::~Term(void)
 {
-	delete _Value;
-	_Value = nullptr;
-	LOG_TRACE(std::cout << "Expressions::Term::~Term()" << std::endl);
+    delete _Value;
+    _Value = nullptr;
+    LOG_TRACE(std::cout << "Expressions::Term::~Term()" << std::endl);
 }
 
 float Expressions::Term::GetValue(void)
 {
-	LOG_TRACE(std::cout << "Expressions::Term::GetValue()" << std::endl);
-	if(_Value == nullptr)
-	{
-		_Value = new float(Calculate());
-	}
-	assert(_Value != nullptr);
-	
-	return *_Value;
+    LOG_TRACE(std::cout << "Expressions::Term::GetValue()" << std::endl);
+    if(_Value == nullptr)
+    {
+        _Value = new float(Calculate());
+    }
+    assert(_Value != nullptr);
+    
+    return *_Value;
 }
 
 void Expressions::Term::InvalidateValue(void)
 {
-	LOG_TRACE(std::cout << "Expressions::Term::InvalidateValue()" << std::endl);
-	delete _Value;
-	_Value = nullptr;
-	if(_Parent != nullptr)
-	{
-		_Parent->InvalidateValue();
-	}
+    LOG_TRACE(std::cout << "Expressions::Term::InvalidateValue()" << std::endl);
+    delete _Value;
+    _Value = nullptr;
+    if(_Parent != nullptr)
+    {
+        _Parent->InvalidateValue();
+    }
 }
 
 void Expressions::Term::SetParent(Expressions::TermParent * Parent)
 {
-	LOG_TRACE(std::cout << "Expressions::Term::SetParent(Expressions::TermParent *)" << std::endl);
-	assert(_Parent == nullptr || Parent == nullptr);
-	_Parent = Parent;
+    LOG_TRACE(std::cout << "Expressions::Term::SetParent(Expressions::TermParent *)" << std::endl);
+    assert(_Parent == nullptr || Parent == nullptr);
+    _Parent = Parent;
 }

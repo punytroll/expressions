@@ -1,1 +1,2 @@
-option('trace_logging', type: 'combo', choices: ['no', 'yes', 'if_main_project'], value: 'if_main_project')
+option('tests', type: 'feature', value: 'auto', description: 'Run unit tests when meson test is called. \'auto\' defaults to disabled when the project is a subproject.')
+option('trace_logging', type: 'feature', value: 'auto', description: 'Enables trace logs for debugging. \'auto\' defaults to disabled when the project is a subproject.')
