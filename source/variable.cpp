@@ -32,7 +32,7 @@ Expressions::Variable::Variable(Expressions::Expression && Expression) :
 Expressions::Variable::~Variable(void)
 {
     LOG_TRACE(std::cout << "Expressions::Variable::~Variable()" << std::endl);
-    assert(_Term == nullptr || _Term->_Parent == this);
+    assert((_Term == nullptr) || (_Term->m_Parent == this));
     while(_DependentVariableTerms.empty() == false)
     {
         auto DependentVariableTerm{_DependentVariableTerms.begin()};
@@ -73,7 +73,7 @@ void Expressions::Variable::Reset(void)
     if(_Term != nullptr)
     {
         OldValue = _Term->GetValue();
-        assert(_Term->_Parent == this);
+        assert(_Term->m_Parent == this);
         _Term->SetParent(nullptr);
     }
     _Term = nullptr;
@@ -93,7 +93,7 @@ void Expressions::Variable::SetExpression(Expressions::Expression && Expression)
     if(_Term != nullptr)
     {
         OldValue = _Term->GetValue();
-        assert(_Term->_Parent == this);
+        assert(_Term->m_Parent == this);
         _Term->SetParent(nullptr);
     }
     _Term = Expression.ExtractTerm();

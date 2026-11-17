@@ -23,22 +23,22 @@ namespace Expressions
     public:
         friend class Expressions::Expression;
         friend class Expressions::Variable;
-    public:
+        
+        ~Term() override;
         Term(const Expressions::Term & Term) = delete;
         Term(Expressions::Term && Term) = delete;
-        Term & operator=(const Expressions::Term & Term) = delete;
-        Term & operator=(Expressions::Term && Term) = delete;
-    public:
-        virtual ~Term(void);
-        float GetValue(void);
-        virtual float Calculate(void) = 0;
-        virtual void InvalidateValue(void) override;
-        void SetParent(Expressions::TermParent * Parent);
+        auto operator=(Expressions::Term const & Term) -> Expressions::Term & = delete;
+        auto operator=(Expressions::Term && Term) -> Expressions::Term & = delete;
+        auto GetValue() -> float;
+        virtual auto Calculate() -> float = 0;
+        auto InvalidateValue() -> void override;
+        auto SetParent(Expressions::TermParent * Parent) -> void;
     protected:
-        Term(void);
+        Term();
+        
     private:
-        Expressions::TermParent * _Parent;
-        float * _Value;
+        Expressions::TermParent * m_Parent = nullptr;
+        std::optional<float> m_Value;
     }; 
 }
 

@@ -11,46 +11,40 @@
 
 #include "common.h"
 
-Expressions::Term::Term(void) :
-    _Parent(nullptr),
-    _Value(nullptr)
+Expressions::Term::Term()
 {
     LOG_TRACE(std::cout << "Expressions::Term::Term()" << std::endl);
 }
 
-Expressions::Term::~Term(void)
+Expressions::Term::~Term()
 {
-    delete _Value;
-    _Value = nullptr;
     LOG_TRACE(std::cout << "Expressions::Term::~Term()" << std::endl);
 }
 
-float Expressions::Term::GetValue(void)
+auto Expressions::Term::GetValue() -> float
 {
-    LOG_TRACE(std::cout << "Expressions::Term::GetValue()" << std::endl);
-    if(_Value == nullptr)
+    LOG_TRACE(std::cout << "auto Expressions::Term::GetValue() -> float" << std::endl);
+    if(m_Value.has_value() == false)
     {
-        _Value = new float(Calculate());
+        m_Value = Calculate();
     }
-    assert(_Value != nullptr);
     
-    return *_Value;
+    return m_Value.value();
 }
 
-void Expressions::Term::InvalidateValue(void)
+auto Expressions::Term::InvalidateValue() -> void
 {
-    LOG_TRACE(std::cout << "Expressions::Term::InvalidateValue()" << std::endl);
-    delete _Value;
-    _Value = nullptr;
-    if(_Parent != nullptr)
+    LOG_TRACE(std::cout << "auto Expressions::Term::InvalidateValue() -> void" << std::endl);
+    m_Value.reset();
+    if(m_Parent != nullptr)
     {
-        _Parent->InvalidateValue();
+        m_Parent->InvalidateValue();
     }
 }
 
-void Expressions::Term::SetParent(Expressions::TermParent * Parent)
+auto Expressions::Term::SetParent(Expressions::TermParent * Parent) -> void
 {
-    LOG_TRACE(std::cout << "Expressions::Term::SetParent(Expressions::TermParent *)" << std::endl);
-    assert(_Parent == nullptr || Parent == nullptr);
-    _Parent = Parent;
+    LOG_TRACE(std::cout << "auto Expressions::Term::SetParent(Expressions::TermParent *) -> void" << std::endl);
+    assert((m_Parent == nullptr) || (Parent == nullptr));
+    m_Parent = Parent;
 }

@@ -25,7 +25,7 @@ Expressions::Expression::Expression(Expression && Expression)
     LOG_TRACE(std::cout << "Expressions::Expression::Expression(Expressions::Expression &&)" << std::endl);
     if(_Term != nullptr)
     {
-        assert(_Term->_Parent == this);
+        assert(_Term->m_Parent == this);
         _Term->SetParent(nullptr);
     }
     _Term = Expression.ExtractTerm();
@@ -52,7 +52,7 @@ Expressions::Expression::Expression(std::unique_ptr< Expressions::Term > && Term
 Expressions::Expression::~Expression(void)
 {
     LOG_TRACE(std::cout << "Expressions::Expression::~Expression()" << std::endl);
-    assert(_Term == nullptr || _Term->_Parent == this);
+    assert((_Term == nullptr) || (_Term->m_Parent == this));
 }
 
 std::unique_ptr< Expressions::Term > Expressions::Expression::ExtractTerm(void)
@@ -89,7 +89,7 @@ Expressions::Expression & Expressions::Expression::operator=(Expressions::Expres
     LOG_TRACE(std::cout << "Expressions::Expression::operator=(Expressions::Expression &&)" << std::endl);
     if(_Term != nullptr)
     {
-        assert(_Term->_Parent == this);
+        assert(_Term->m_Parent == this);
         _Term->SetParent(nullptr);
     }
     _Term = Expression.ExtractTerm();
