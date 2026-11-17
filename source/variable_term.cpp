@@ -6,7 +6,6 @@
 
 #include <cassert>
 #include <cmath>
-#include <iostream>
 
 #include <expressions/variable.h>
 
@@ -17,13 +16,13 @@ Expressions::VariableTerm::VariableTerm(Expressions::Variable * Variable) :
     _Variable(Variable)
 {
     assert(Variable != nullptr);
-    LOG_TRACE(std::cout << "Expressions::VariableTerm::VariableTerm(Expressions::Variable *)" << std::endl);
+    LOG_TRACE("Expressions::VariableTerm::VariableTerm(Expressions::Variable *)");
     _Variable->_AddDependentTerm(this);
 }
 
 Expressions::VariableTerm::~VariableTerm(void)
 {
-    LOG_TRACE(std::cout << "Expressions::VariableTerm::~VariableTerm()" << std::endl);
+    LOG_TRACE("Expressions::VariableTerm::~VariableTerm()");
     if(_Variable != nullptr)
     {
         _Variable->_RemoveDependentTerm(this);
@@ -32,7 +31,7 @@ Expressions::VariableTerm::~VariableTerm(void)
 
 float Expressions::VariableTerm::Calculate(void)
 {
-    LOG_TRACE(std::cout << "Expressions::VariableTerm::Calculate()" << std::endl);
+    LOG_TRACE("Expressions::VariableTerm::Calculate()");
     if(_Variable != nullptr)
     {
         return _Variable->GetValue();
@@ -45,7 +44,7 @@ float Expressions::VariableTerm::Calculate(void)
 
 void Expressions::VariableTerm::InvalidateReference(void)
 {
-    LOG_TRACE(std::cout << "Expressions::VariableTerm::InvalidateReference()" << std::endl);
+    LOG_TRACE("Expressions::VariableTerm::InvalidateReference()");
     assert(_Variable != nullptr);
     _Variable = nullptr;
     InvalidateValue();

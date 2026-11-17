@@ -4,8 +4,6 @@
  * SPDX-License-Identifier: MIT
  **/
 
-#include <iostream>
-
 #include "common.h"
 #include "division_term.h"
 
@@ -13,19 +11,19 @@ Expressions::DivisionTerm::DivisionTerm(std::unique_ptr< Expressions::Term > && 
     _One(std::move(One)),
     _Two(std::move(Two))
 {
-    LOG_TRACE(std::cout << "Expressions::DivisionTerm::DivisionTerm(std::unique_ptr< Expressions::Term > &&, std::unique_ptr< Expressions::Term > &&)" << std::endl);
+    LOG_TRACE("Expressions::DivisionTerm::DivisionTerm(std::unique_ptr<Expressions::Term> &&, std::unique_ptr<Expressions::Term> &&)");
     _One->SetParent(this);
     _Two->SetParent(this);
 }
 
 Expressions::DivisionTerm::~DivisionTerm(void)
 {
-    LOG_TRACE(std::cout << "Expressions::DivisionTerm::~DivisionTerm()" << std::endl);
+    LOG_TRACE("Expressions::DivisionTerm::~DivisionTerm()");
 }
 
 float Expressions::DivisionTerm::Calculate(void)
 {
-    LOG_TRACE(std::cout << "Expressions::DivisionTerm::Calculate()" << std::endl);
+    LOG_TRACE("auto Expressions::DivisionTerm::Calculate() -> float");
     
     return _One->GetValue() / _Two->GetValue();
 }

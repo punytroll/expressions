@@ -5,7 +5,6 @@
  **/
 
 #include <cassert>
-#include <iostream>
 
 #include <expressions/term.h>
 
@@ -13,17 +12,17 @@
 
 Expressions::Term::Term()
 {
-    LOG_TRACE(std::cout << "Expressions::Term::Term()" << std::endl);
+    LOG_TRACE("Expressions::Term::Term()");
 }
 
 Expressions::Term::~Term()
 {
-    LOG_TRACE(std::cout << "Expressions::Term::~Term()" << std::endl);
+    LOG_TRACE("Expressions::Term::~Term()");
 }
 
 auto Expressions::Term::GetValue() -> float
 {
-    LOG_TRACE(std::cout << "auto Expressions::Term::GetValue() -> float" << std::endl);
+    LOG_TRACE("auto Expressions::Term::GetValue() -> float");
     if(m_Value.has_value() == false)
     {
         m_Value = Calculate();
@@ -34,7 +33,7 @@ auto Expressions::Term::GetValue() -> float
 
 auto Expressions::Term::InvalidateValue() -> void
 {
-    LOG_TRACE(std::cout << "auto Expressions::Term::InvalidateValue() -> void" << std::endl);
+    LOG_TRACE("auto Expressions::Term::InvalidateValue() -> void");
     m_Value.reset();
     if(m_Parent != nullptr)
     {
@@ -44,7 +43,7 @@ auto Expressions::Term::InvalidateValue() -> void
 
 auto Expressions::Term::SetParent(Expressions::TermParent * Parent) -> void
 {
-    LOG_TRACE(std::cout << "auto Expressions::Term::SetParent(Expressions::TermParent *) -> void" << std::endl);
+    LOG_TRACE("auto Expressions::Term::SetParent(Expressions::TermParent *) -> void");
     assert((m_Parent == nullptr) || (Parent == nullptr));
     m_Parent = Parent;
 }

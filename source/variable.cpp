@@ -6,7 +6,6 @@
 
 #include <cassert>
 #include <cmath>
-#include <iostream>
 
 #include <expressions/expression.h>
 #include <expressions/variable.h>
@@ -18,20 +17,20 @@ using namespace Expressions::Operators;
 
 Expressions::Variable::Variable(void)
 {
-    LOG_TRACE(std::cout << "Expressions::Variable::Variable()" << std::endl);
+    LOG_TRACE("Expressions::Variable::Variable()");
 }
 
 Expressions::Variable::Variable(Expressions::Expression && Expression) :
     _Term(std::move(Expression.ExtractTerm()))
 {
-    LOG_TRACE(std::cout << "Expressions::Variable::Variable(Expressions::Expression &&)" << std::endl);
+    LOG_TRACE("Expressions::Variable::Variable(Expressions::Expression &&)");
     _Term->SetParent(this);
     InvalidateValue();
 }
 
 Expressions::Variable::~Variable(void)
 {
-    LOG_TRACE(std::cout << "Expressions::Variable::~Variable()" << std::endl);
+    LOG_TRACE("Expressions::Variable::~Variable()");
     assert((_Term == nullptr) || (_Term->m_Parent == this));
     while(_DependentVariableTerms.empty() == false)
     {
@@ -44,7 +43,7 @@ Expressions::Variable::~Variable(void)
 
 float Expressions::Variable::GetValue(void)
 {
-    LOG_TRACE(std::cout << "Expressions::Variable::GetValue()" << std::endl);
+    LOG_TRACE("auto Expressions::Variable::GetValue() -> float");
     if(_Term != nullptr)
     {
         return _Term->GetValue();
@@ -57,17 +56,17 @@ float Expressions::Variable::GetValue(void)
 
 void Expressions::Variable::InvalidateValue(void)
 {
-    LOG_TRACE(std::cout << "Expressions::Variable::InvalidateValue()" << std::endl);
+    LOG_TRACE("auto Expressions::Variable::InvalidateValue() -> void");
     for(auto & DependentVariableTerm : _DependentVariableTerms)
     {
-        LOG_TRACE(std::cout << "    Notifying one dependent variable term that we changed." << std::endl);
+        LOG_TRACE("    Notifying one dependent variable term that we changed.");
         DependentVariableTerm->InvalidateValue();
     }
 }
 
 void Expressions::Variable::Reset(void)
 {
-    LOG_TRACE(std::cout << "Expressions::Variable::Reset()" << std::endl);
+    LOG_TRACE("auto Expressions::Variable::Reset() -> void");
     float OldValue{std::nanf("")};
     
     if(_Term != nullptr)
@@ -85,7 +84,7 @@ void Expressions::Variable::Reset(void)
 
 void Expressions::Variable::SetExpression(Expressions::Expression && Expression)
 {
-    LOG_TRACE(std::cout << "Expressions::Variable::SetExpression(Expressions::Expression &&)" << std::endl);
+    LOG_TRACE("auto Expressions::Variable::SetExpression(Expressions::Expression &&) -> void");
     
     float OldValue{std::nanf("")};
     float NewValue{std::nanf("")};
@@ -120,7 +119,7 @@ void Expressions::Variable::_RemoveDependentTerm(Expressions::VariableTerm * Dep
 
 Expressions::Variable & Expressions::Variable::operator=(Expressions::Variable & Variable)
 {
-    LOG_TRACE(std::cout << "Expressions::Variable & Expressions::Variable::operator=(Expressions::Variable &)" << std::endl);
+    LOG_TRACE("auto Expressions::Variable::operator=(Expressions::Variable &) -> Expressions::Variable &");
     SetExpression(Expressions::Expression(Variable));
     
     return *this;
@@ -128,7 +127,7 @@ Expressions::Variable & Expressions::Variable::operator=(Expressions::Variable &
 
 Expressions::Variable & Expressions::Variable::operator=(Expressions::Expression && Expression)
 {
-    LOG_TRACE(std::cout << "Expressions::Variable & Expressions::Variable::operator=(Expressions::Expression &&)" << std::endl);
+    LOG_TRACE("auto Expressions::Variable::operator=(Expressions::Expression &&) -> Expressions::Variable &");
     SetExpression(std::move(Expression));
     
     return *this;

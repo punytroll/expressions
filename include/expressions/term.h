@@ -7,6 +7,8 @@
 #ifndef EXPRESSIONS__INCLUDE__EXPRESSIONS__TERM_H
 #define EXPRESSIONS__INCLUDE__EXPRESSIONS__TERM_H
 
+#include <optional>
+
 #include <expressions/term_parent.h>
 
 namespace Expressions

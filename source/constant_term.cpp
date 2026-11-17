@@ -4,26 +4,23 @@
  * SPDX-License-Identifier: MIT
  **/
 
-#include <cassert>
-#include <iostream>
-
 #include "common.h"
 #include "constant_term.h"
 
 Expressions::ConstantTerm::ConstantTerm(float Value) :
     _Value(Value)
 {
-    LOG_TRACE(std::cout << "Expressions::ConstantTerm::ConstantTerm(float)" << std::endl);
+    LOG_TRACE("Expressions::ConstantTerm::ConstantTerm(float)");
 }
 
 Expressions::ConstantTerm::~ConstantTerm(void)
 {
-    LOG_TRACE(std::cout << "Expressions::ConstantTerm::~ConstantTerm()" << std::endl);
+    LOG_TRACE("Expressions::ConstantTerm::~ConstantTerm()");
 }
 
 float Expressions::ConstantTerm::Calculate(void)
 {
-    LOG_TRACE(std::cout << "Expressions::ConstantTerm::Calculate()" << std::endl);
+    LOG_TRACE("auto Expressions::ConstantTerm::Calculate() -> float");
     
     return _Value;
 }
