@@ -625,6 +625,16 @@ int main()
         assert(Two->GetWidth() == 20.0f);
     }
     std::cout << "<<<<<<<<<<<<<<<<<<<<<<<< " << TestNumber << " <<<<<<<<<<<<<<<<<<<<<<<<\n\n";
+    TestNumber += 1;
+    std::cout << ">>>>>>>>>>>>>>>>>>>>>>>> " << TestNumber << " >>>>>>>>>>>>>>>>>>>>>>>>\n";
+    {
+        auto Variable = Expressions::Variable{};
+        auto Expression = 44.0_c * Variable;
+        
+        Variable.SetExpression(1.5_c);
+        assert(Expression.GetValue() == 66.0f);
+    }
+    std::cout << "<<<<<<<<<<<<<<<<<<<<<<<< " << TestNumber << " <<<<<<<<<<<<<<<<<<<<<<<<\n\n";
     
     return 0;
 }

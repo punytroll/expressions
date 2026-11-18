@@ -25,17 +25,18 @@ namespace Expressions
     {
     public:
         friend class Expressions::Variable;
-        friend Expressions::Expression Expressions::Operators::operator""_c(long double Value);
-        friend Expressions::Expression Expressions::Operators::constant(double Value);
-        friend Expressions::Expression Expressions::Operators::operator-(Expressions::Expression && One);
-        friend Expressions::Expression Expressions::Operators::operator-(Expressions::Variable & Variable);
-        friend Expressions::Expression Expressions::Operators::operator+(Expressions::Expression && One, Expressions::Expression && Two);
-        friend Expressions::Expression Expressions::Operators::operator+(Expressions::Variable & One, Expressions::Expression && Two);
-        friend Expressions::Expression Expressions::Operators::operator+(Expressions::Variable & One, Expressions::Variable & Two);
-        friend Expressions::Expression Expressions::Operators::operator-(Expressions::Expression && One, Expressions::Expression && Two);
-        friend Expressions::Expression Expressions::Operators::operator-(Expressions::Variable & One, Expressions::Expression && Two);
-        friend Expressions::Expression Expressions::Operators::operator*(Expressions::Expression && One, Expressions::Expression && Two);
-        friend Expressions::Expression Expressions::Operators::operator/(Expressions::Expression && One, Expressions::Expression && Two);
+        friend auto Expressions::Operators::operator""_c(long double Value) -> Expressions::Expression;
+        friend auto Expressions::Operators::constant(float Value) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator-(Expressions::Expression && One) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator-(Expressions::Variable & Variable) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator+(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator+(Expressions::Variable & One, Expressions::Expression && Two) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator+(Expressions::Variable & One, Expressions::Variable & Two) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator-(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator-(Expressions::Variable & One, Expressions::Expression && Two) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator*(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator*(Expressions::Expression && One, Expressions::Variable & Two) -> Expressions::Expression;
+        friend auto Expressions::Operators::operator/(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression;
         
     public:
         Expression();

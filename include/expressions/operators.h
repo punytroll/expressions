@@ -14,17 +14,18 @@ namespace Expressions
     
     namespace Operators
     {
-        Expressions::Expression operator""_c(long double Value);
-        Expressions::Expression constant(double Value);
-        Expressions::Expression operator-(Expressions::Expression && One);
-        Expressions::Expression operator-(Expressions::Variable & Variable);
-        Expressions::Expression operator+(Expressions::Expression && One, Expressions::Expression && Two);
-        Expressions::Expression operator+(Expressions::Variable & One, Expressions::Expression && Two);
-        Expressions::Expression operator+(Expressions::Variable & One, Expressions::Variable & Two);
-        Expressions::Expression operator-(Expressions::Expression && One, Expressions::Expression && Two);
-        Expressions::Expression operator-(Expressions::Variable & One, Expressions::Expression && Two);
-        Expressions::Expression operator*(Expressions::Expression && One, Expressions::Expression && Two);
-        Expressions::Expression operator/(Expressions::Expression && One, Expressions::Expression && Two);
+        auto operator""_c(long double Value) -> Expressions::Expression;
+        auto constant(float Value) -> Expressions::Expression;
+        auto operator-(Expressions::Expression && One) -> Expressions::Expression;
+        auto operator-(Expressions::Variable & Variable) -> Expressions::Expression;
+        auto operator+(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression;
+        auto operator+(Expressions::Variable & One, Expressions::Expression && Two) -> Expressions::Expression;
+        auto operator+(Expressions::Variable & One, Expressions::Variable & Two) -> Expressions::Expression;
+        auto operator-(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression;
+        auto operator-(Expressions::Variable & One, Expressions::Expression && Two) -> Expressions::Expression;
+        auto operator*(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression;
+        auto operator*(Expressions::Expression && One, Expressions::Variable & Two) -> Expressions::Expression;
+        auto operator/(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression;
     }
 }
 

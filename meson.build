@@ -1,7 +1,7 @@
 project(
   'expressions',
   'cpp',
-  version: '26.11.0',
+  version: '26.11.1',
   license: 'MIT',
   license_files: ['LICENSE'],
   meson_version: '>=1.12.0',

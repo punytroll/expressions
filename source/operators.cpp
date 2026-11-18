@@ -16,77 +16,84 @@
 #include "subtraction_term.h"
 #include "variable_term.h"
 
-Expressions::Expression Expressions::Operators::operator""_c(long double Value)
+auto Expressions::Operators::operator""_c(long double Value) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator\"\" _c(long double) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::ConstantTerm>(Value)};
 }
 
-Expressions::Expression Expressions::Operators::constant(double Value)
+auto Expressions::Operators::constant(float Value) -> Expressions::Expression
 {
-    LOG_TRACE("auto Expressions::Operators::constant(double) -> Expressions::Expression");
+    LOG_TRACE("auto Expressions::Operators::constant(float) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::ConstantTerm>(Value)};
 }
 
-Expressions::Expression Expressions::Operators::operator-(Expressions::Expression && One)
+auto Expressions::Operators::operator-(Expressions::Expression && One) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator-(Expressions::Expression &&) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::NegationTerm>(std::move(One.ExtractTerm()))};
 }
 
-Expressions::Expression Expressions::Operators::operator-(Expressions::Variable & Variable)
+auto Expressions::Operators::operator-(Expressions::Variable & Variable) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator-(Expressions::Variable &) -> Expressions::Expression");
     
     return -Expressions::Expression{std::make_unique<Expressions::VariableTerm>(&Variable)};
 }
 
-Expressions::Expression Expressions::Operators::operator+(Expressions::Expression && One, Expressions::Expression && Two)
+auto Expressions::Operators::operator+(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator+(Expressions::Expression &&, Expressions::Expression &&) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::AdditionTerm>(std::move(One.ExtractTerm()), std::move(Two.ExtractTerm()))};
 }
 
-Expressions::Expression Expressions::Operators::operator+(Expressions::Variable & One, Expressions::Expression && Two)
+auto Expressions::Operators::operator+(Expressions::Variable & One, Expressions::Expression && Two) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator+(Expressions::Variable &, Expressions::Expression &&) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::VariableTerm>(&One)} + Expressions::Expression{std::move(Two.ExtractTerm())};
 }
 
-Expressions::Expression Expressions::Operators::operator+(Expressions::Variable & One, Expressions::Variable & Two)
+auto Expressions::Operators::operator+(Expressions::Variable & One, Expressions::Variable & Two) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator+(Expressions::Variable &, Expressions::Variable &) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::VariableTerm>(&One)} + Expressions::Expression{std::make_unique< Expressions::VariableTerm >(&Two)};
 }
 
-Expressions::Expression Expressions::Operators::operator-(Expressions::Expression && One, Expressions::Expression && Two)
+auto Expressions::Operators::operator-(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator+(Expressions::Expression &&, Expressions::Expression &&) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::SubtractionTerm>(std::move(One.ExtractTerm()), std::move(Two.ExtractTerm()))};
 }
 
-Expressions::Expression Expressions::Operators::operator-(Expressions::Variable & One, Expressions::Expression && Two)
+auto Expressions::Operators::operator-(Expressions::Variable & One, Expressions::Expression && Two) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator-(Expressions::Variable &, Expressions::Expression &&) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::VariableTerm>(&One)} - Expressions::Expression{std::move(Two.ExtractTerm())};
 }
 
-Expressions::Expression Expressions::Operators::operator*(Expressions::Expression && One, Expressions::Expression && Two)
+auto Expressions::Operators::operator*(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator*(Expressions::Expression &&, Expressions::Expression &&) -> Expressions::Expression");
     
     return Expressions::Expression{std::make_unique<Expressions::MultiplicationTerm>(std::move(One.ExtractTerm()), std::move(Two.ExtractTerm()))};
 }
 
-Expressions::Expression Expressions::Operators::operator/(Expressions::Expression && One, Expressions::Expression && Two)
+auto Expressions::Operators::operator*(Expressions::Expression && One, Expressions::Variable & Two) -> Expressions::Expression
+{
+    LOG_TRACE("auto Expressions::Operators::operator*(Expressions::Expression &&, Expressions::Variable &) -> Expressions::Expression");
+    
+    return Expressions::Expression{std::make_unique<Expressions::MultiplicationTerm>(std::move(One.ExtractTerm()), std::make_unique<Expressions::VariableTerm>(std::addressof(Two)))};
+}
+
+auto Expressions::Operators::operator/(Expressions::Expression && One, Expressions::Expression && Two) -> Expressions::Expression
 {
     LOG_TRACE("auto Expressions::Operators::operator/(Expressions::Expression &&, Expressions::Expression &&) -> Expressions::Expression");
     
