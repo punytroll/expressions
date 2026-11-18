@@ -25,7 +25,7 @@ Expressions::Variable::Variable(Expressions::Expression && Expression) :
 {
     LOG_TRACE("Expressions::Variable::Variable(Expressions::Expression &&)");
     _Term->SetParent(this);
-    InvalidateValue();
+    //~ InvalidateValue();
 }
 
 Expressions::Variable::~Variable(void)
@@ -120,7 +120,10 @@ void Expressions::Variable::_RemoveDependentTerm(Expressions::VariableTerm * Dep
 Expressions::Variable & Expressions::Variable::operator=(Expressions::Variable & Variable)
 {
     LOG_TRACE("auto Expressions::Variable::operator=(Expressions::Variable &) -> Expressions::Variable &");
-    SetExpression(Expressions::Expression(Variable));
+    if(this != std::addressof(Variable))
+    {
+        SetExpression(Expressions::Expression{Variable});
+    }
     
     return *this;
 }

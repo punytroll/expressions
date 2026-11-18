@@ -36,20 +36,22 @@ namespace Expressions
         friend Expressions::Expression Expressions::Operators::operator-(Expressions::Variable & One, Expressions::Expression && Two);
         friend Expressions::Expression Expressions::Operators::operator*(Expressions::Expression && One, Expressions::Expression && Two);
         friend Expressions::Expression Expressions::Operators::operator/(Expressions::Expression && One, Expressions::Expression && Two);
+        
     public:
-        Expression(const Expressions::Expression & Expression) = delete;
-        Expressions::Expression & operator=(const Expressions::Expression & Expression) = delete;
-    public:
-        Expression(void);
-        Expression(Expressions::Variable & Variable);
-        Expression(Expressions::Expression && Expression);
-        ~Expression(void);
-        std::unique_ptr< Expressions::Term > ExtractTerm(void);
-        float GetValue(void);
-        virtual void InvalidateValue(void);
-        Expressions::Expression & operator=(Expressions::Expression && Expression);
+        Expression();
+        Expression(Expressions::Expression && Expression) noexcept;
+        explicit Expression(Expressions::Variable & Variable);
+        Expression(Expressions::Expression const & Expression) = delete;
+        ~Expression();
+        auto operator=(Expressions::Expression && Expression) noexcept -> Expressions::Expression &;
+        auto operator=(Expressions::Expression const & Expression) -> Expressions::Expression & = delete;
+        auto ExtractTerm() -> std::unique_ptr<Expressions::Term>;
+        auto GetValue() -> float;
+        auto InvalidateValue() -> void override;
+        
     private:
-        Expression(std::unique_ptr< Expressions::Term > && Term);
+        explicit Expression(std::unique_ptr<Expressions::Term> && Term);
+        
         std::unique_ptr< Expressions::Term > _Term;
     };
 }
